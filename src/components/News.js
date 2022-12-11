@@ -32,7 +32,11 @@ const News = (props) => {
   }, []);
 
   const fetchMoreData = async () => {
-    let url = `https://newsapi.org/v2/top-headlines?apiKey=${props.apiKey}&country=${props.country}&page=${page}&pageSize=${props.pageSize}&category=${props.category}`;
+    let url = `https://newsapi.org/v2/top-headlines?apiKey=${
+      props.apiKey
+    }&country=${props.country}&page=${page + 1}&pageSize=${
+      props.pageSize
+    }&category=${props.category}`;
     setPage(page + 1);
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -56,7 +60,7 @@ const News = (props) => {
               return (
                 <div
                   className="col-lg-4 d-flex align-items-stretch"
-                  key={Math.random()}
+                  key={e.url}
                 >
                   <NewsItem
                     title={e.title ? e.title.slice(0, 62) : ""}
